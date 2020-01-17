@@ -1,5 +1,4 @@
 #include "TCPConn.h"
-#include "Button.cpp"
 #include "exceptions.h"
 #include <algorithm>
 #include <sys/ioctl.h>
