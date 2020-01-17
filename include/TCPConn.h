@@ -1,9 +1,12 @@
 #ifndef TCPCONN_H
 #define TCPCONN_H
+#pragma once
 
-#include "FileDesc.h"
+#include<string>
+#include<vector>
+#include<iostream>
 
-const int max_attempts = 2;
+//const int max_attempts = 2;
 
 class TCPConn 
 {
@@ -11,43 +14,33 @@ public:
    TCPConn();
    ~TCPConn();
 
-   bool accept(SocketFD &server);
+   int accept(int server);
 
-   int sendText(const char *msg);
    int sendText(const char *msg, int size);
 
    void handleConnection();
-   void startAuthentication();
-   void getUsername();
-   void getPasswd();
+   //void startAuthentication();
+   //void getUsername();
+   //void getPasswd();
    void sendMenu();
    void getMenuChoice();
-   void setPassword();
-   void changePassword();
-   
-   bool getUserInput(std::string &cmd);
+   //void setPassword();
+   //void changePassword();
 
    void disconnect();
    bool isConnected();
 
-   unsigned long getIPAddr() { return _connfd.getIPAddr(); };
-
 private:
 
+   int connfd;
 
-   enum statustype { s_username, s_changepwd, s_confirmpwd, s_passwd, s_menu };
-
-   statustype _status = s_username;
-
-   SocketFD _connfd;
+   std::vector<std::string> commands;
  
-   std::string _username; // The username this connection is associated with
+  // std::string username; // The username this connection is associated with
 
-   std::string _inputbuf;
+   //std::string _newpwd; // Used to store user input for changing passwords
 
-   std::string _newpwd; // Used to store user input for changing passwords
-
-   int _pwd_attempts = 0;
+   //int _pwd_attempts = 0;
 };
 
 
